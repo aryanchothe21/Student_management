@@ -1,0 +1,13 @@
+{
+  "name": "student-management-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small student management demo for a DevOps lab",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
