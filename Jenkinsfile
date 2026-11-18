@@ -9,12 +9,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
         stage('Build Docker image') {
             steps {
-                sh 'docker build -t student-management:${BUILD_NUMBER} .'
+                bat 'docker build -t student-management:%BUILD_NUMBER% .'
             }
         }
     }
