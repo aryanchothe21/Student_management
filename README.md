@@ -62,14 +62,14 @@ Replace `<YOUR-USERNAME>` with your GitHub username. GitHub may ask you to authe
 
 ## 4. Run the Jenkins pipeline
 
-The `Jenkinsfile` defines three stages: checkout source, run `npm test`, and build a Docker image tagged with the Jenkins build number.
+The `Jenkinsfile` checks out the source, runs `npm test`, builds a Docker image tagged with the Jenkins build number, and deploys it as a container named `student-management`. Each successful deployment replaces the previous container.
 
-1. Use a Jenkins agent with Node.js 18+ and Docker CLI installed, and permission to access the Docker daemon. For a classroom demo, Jenkins and Docker can run on the same machine if the agent is configured appropriately.
+1. Use a Windows Jenkins agent with Node.js 18+ and Docker CLI installed, and permission to access the Docker daemon. For a classroom demo, Jenkins and Docker can run on the same machine if the agent is configured appropriately.
 2. In Jenkins, choose **New Item → Pipeline**.
 3. Under **Pipeline**, choose **Pipeline script from SCM**, select **Git**, enter your GitHub repository URL, choose the `main` branch, and set **Script Path** to `Jenkinsfile`.
-4. Save, then select **Build Now**. Open the build and its **Console Output** to show the test and Docker build results.
+4. Commit and push the `Jenkinsfile` to GitHub, then select **Build Now**. Open the build and its **Console Output** to show the test, image build, and deployment results.
 
-The pipeline uses `sh`, so it expects a Linux Jenkins agent. If the agent is Windows, use a Windows agent and change the pipeline commands to `bat` syntax. Docker access is required for the image stage; installing Jenkins alone does not provide Docker access.
+After a successful build, open [http://localhost:3000](http://localhost:3000) on the machine running Docker. The Jenkins account must be able to run Docker commands. Port 3000 must be available; if another process or container is already using it, stop that service or change the host port mapping in the Jenkinsfile.
 
 ### Optional: build automatically after a GitHub push
 
